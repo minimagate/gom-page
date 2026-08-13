@@ -1,0 +1,22 @@
+{
+  "observation": "translation-baseline",
+  "artifact_dir": "artifacts/showcases/semantic_preservation/translation_embedding_baseline/2026-08-04T210618",
+  "charts": [
+    {
+      "source": "language_similarity_distribution.html",
+      "output": "translation-baseline-language-distribution.html"
+    },
+    {
+      "source": "text_language_similarity_heatmap.html",
+      "output": "translation-baseline-text-language-heatmap.html"
+    },
+    {
+      "source": "language_centroid_distances.html",
+      "output": "translation-baseline-centroid-distances.html"
+    },
+    {
+      "source": "embedding_pca_geometry.html",
+      "output": "translation-baseline-pca-geometry.html"
+    }
+  ]
+}

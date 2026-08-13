@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +13,22 @@ SITE_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RESEARCH_ROOT = SITE_ROOT.parent / "geometry-of-meaning"
 MANIFEST_DIR = SITE_ROOT / "data" / "observation-charts"
 CHART_DIR = SITE_ROOT / "static" / "charts"
+HEIGHT_BRIDGE = """<script>
+(() => {
+  const reportHeight = () => {
+    const height = Math.ceil(Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    ));
+    window.parent.postMessage({ type: "gom-plot-height", height }, window.location.origin);
+  };
+  new ResizeObserver(reportHeight).observe(document.body);
+  window.addEventListener("load", reportHeight);
+  requestAnimationFrame(() => requestAnimationFrame(reportHeight));
+})();
+</script>"""
 
 
 def _load_manifest(path: Path) -> dict[str, Any]:
@@ -75,9 +90,14 @@ def sync_manifest(path: Path, research_root: Path, seen_outputs: set[str]) -> li
         if "plotly" not in html.lower():
             raise ValueError(f"chart does not appear to contain Plotly output: {source}")
 
+        if "</body>" not in html.lower():
+            raise ValueError(f"chart HTML has no closing body element: {source}")
+        closing_body = html.lower().rfind("</body>")
+        html = html[:closing_body] + HEIGHT_BRIDGE + html[closing_body:]
+
         destination = CHART_DIR / output_name
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, destination)
+        destination.write_text(html, encoding="utf-8")
         seen_outputs.add(output_name)
         copied.append(destination)
     return copied

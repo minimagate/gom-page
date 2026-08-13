@@ -1,0 +1,30 @@
+{
+  "observation": "compression-decay",
+  "artifact_dir": "artifacts/showcases/semantic_preservation/cross_lingual_compression/2026-08-07T164304",
+  "charts": [
+    {
+      "source": "aggregate_decay.html",
+      "output": "compression-aggregate-decay.html"
+    },
+    {
+      "source": "terminal_distribution.html",
+      "output": "compression-terminal-distribution.html"
+    },
+    {
+      "source": "terminal_heatmap.html",
+      "output": "compression-terminal-heatmap.html"
+    },
+    {
+      "source": "step_displacement.html",
+      "output": "compression-step-displacement.html"
+    },
+    {
+      "source": "path_geometry.html",
+      "output": "compression-path-geometry.html"
+    },
+    {
+      "source": "displacement_pca.html",
+      "output": "compression-displacement-pca.html"
+    }
+  ]
+}

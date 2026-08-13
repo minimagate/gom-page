@@ -1,0 +1,26 @@
+{
+  "observation": "logical-corners",
+  "artifact_dir": "artifacts/showcases/logical_boundaries/negation_antonym_square/2026-08-13T113927",
+  "charts": [
+    {
+      "source": "pair_similarity.html",
+      "output": "negation-pair-similarity.html"
+    },
+    {
+      "source": "predicate_gap_heatmap.html",
+      "output": "negation-predicate-gap.html"
+    },
+    {
+      "source": "edge_alignment.html",
+      "output": "negation-edge-alignment.html"
+    },
+    {
+      "source": "square_closure.html",
+      "output": "negation-square-closure.html"
+    },
+    {
+      "source": "embedding_pca.html",
+      "output": "negation-embedding-pca.html"
+    }
+  ]
+}

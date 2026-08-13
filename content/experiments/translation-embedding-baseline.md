@@ -7,7 +7,7 @@ date = 2026-08-04
 kind = "semantic preservation"
 +++
 
-Before testing transformation, the project measures translation alone. Twelve canonical passages appear in English, Italian, Chinese, Japanese, and Danish; `multilingual-e5-large` embeds each language version and compares the four non-English variants with the English reference.
+Before testing transformation, the project measures translation alone. Its data source is the [Canonical passages v0.1.0 corpus](/data/canonical-passages/): twelve public-domain passages with stable originals, metadata, and canonical versions in English, Italian, Chinese, Japanese, and Danish. `multilingual-e5-large` embeds each language version and compares the four non-English variants with the English reference.
 
 The experiment establishes its reference condition rather than drawing conclusions: translation changes the representation before any further transformation is applied. Results and visual analysis live in its observation.
 

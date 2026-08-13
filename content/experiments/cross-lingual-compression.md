@@ -7,7 +7,7 @@ date = 2026-08-07
 kind = "semantic preservation"
 +++
 
-This experiment follows 12 passages across five languages through four states: the complete text, then versions at 50%, 25%, and 12.5% of the source length. It measures how each embedding moves away from its uncompressed anchor.
+This experiment draws its source texts and canonical translations from the [Canonical passages v0.1.0 corpus](/data/canonical-passages/). It follows all 12 passages across five languages through four states: the complete text, then versions at 50%, 25%, and 12.5% of the source length. It measures how each embedding moves away from its uncompressed anchor.
 
 The experiment defines a trajectory: every text-language pair starts at its unchanged anchor and moves through the same three compression levels. Results and visual analysis live in its observation.
 

@@ -1,4 +1,4 @@
-<figure class="plot" style="--plot-ratio: {{ ratio }}">
-  <iframe src="{{ get_url(path=path, trailing_slash=false) }}" title="{{ title }}" scrolling="no"></iframe>
+<figure class="plot">
+  <iframe data-plot-frame src="{{ get_url(path=path, trailing_slash=false) }}" title="{{ title }}" scrolling="no"></iframe>
   <figcaption>{{ caption | safe }}</figcaption>
 </figure>
