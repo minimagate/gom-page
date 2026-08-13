@@ -1,0 +1,10 @@
+<div class="post-list">
+  {% for post in section.pages %}
+  <a class="post-link" href="{{ post.permalink }}">
+    <div class="post-row">
+      <p>{{ post.title }}</p>
+      <time datetime="{{ post.date }}">{{ post.date | date(format="%B %-d, %Y") }}</time>
+    </div>
+  </a>
+  {% endfor %}
+</div>

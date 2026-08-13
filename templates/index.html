@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+  <h1 class="page-heading">Geometry of Meaning</h1>
+  <p class="intro">A research project on the shape of semantic space. It applies controlled changes—translation, compression, negation, and lexical opposition—to text, then measures how embeddings move.</p>
+
+  {% set experiments = get_section(path="experiments/_index.md") %}
+  <div class="post-list-wrap">
+    <h2 class="list-heading">Experiments</h2>
+    <div class="post-list">
+      {% for post in experiments.pages %}
+      <a class="post-link" href="{{ post.permalink }}"><div class="post-row"><p>{{ post.title }}</p><span class="project-category">{{ post.extra.kind }}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% set observations = get_section(path="observations/_index.md") %}
+  <div class="post-list-wrap">
+    <h2 class="list-heading">Observations</h2>
+    <div class="post-list">
+      {% for post in observations.pages %}
+      <a class="post-link" href="{{ post.permalink }}"><div class="post-row"><p>{{ post.title }}</p><time datetime="{{ post.date }}">{{ post.date | date(format="%B %-d, %Y") }}</time></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <p class="quote">The corpus, methods, notebooks, and immutable measurements are available in the <a class="inline-link" href="{{ config.extra.repository }}">research repository</a>.</p>
+</section>
+{% endblock content %}

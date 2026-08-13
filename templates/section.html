@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}<title>{{ section.title }} | {{ config.title }}</title>{% endblock title %}
+{% block content %}
+<section>
+  <h1 class="page-heading">{{ section.title }}</h1>
+  {% if section.content %}<div class="prose section-intro">{{ section.content | safe }}</div>{% endif %}
+  {% include "partials/post-list.html" %}
+</section>
+{% endblock content %}

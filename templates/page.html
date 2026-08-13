@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}<title>{{ page.title }} | {{ config.title }}</title>{% endblock title %}
+{% block description %}<meta name="description" content="{{ page.description }}">{% endblock description %}
+{% block canonical %}{{ page.permalink }}{% endblock canonical %}
+{% block content %}
+<section>
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-meta"><time datetime="{{ page.date }}">{{ page.date | date(format="%B %-d, %Y") }}</time></div>
+  <article class="prose">{{ page.content | safe }}</article>
+</section>
+{% endblock content %}
