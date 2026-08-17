@@ -11,18 +11,18 @@ It is the common input for the translation baseline and cross-lingual compressio
 ## Entries
 
 <div class="table-wrap"><table><thead><tr><th>Text ID</th><th>Work</th><th>Category</th><th>Original language</th></tr></thead><tbody>
-<tr><td><code>darwin_natural_selection</code></td><td>On the Origin of Species — Natural Selection</td><td>scientific</td><td>en</td></tr>
-<tr><td><code>declaration_human_equality</code></td><td>Declaration of Independence — Human Equality and the Right of Revolution</td><td>political</td><td>en</td></tr>
-<tr><td><code>descartes_methodic_doubt</code></td><td>Discourse on the Method — Methodic Doubt and the Cogito</td><td>philosophy</td><td>fr</td></tr>
-<tr><td><code>douglass_learning_to_read</code></td><td>Narrative of the Life of Frederick Douglass — Learning to Read</td><td>autobiography</td><td>en</td></tr>
-<tr><td><code>einstein_special_relativity</code></td><td>On the Electrodynamics of Moving Bodies — Opening</td><td>scientific</td><td>de</td></tr>
-<tr><td><code>hamlet_to_be_or_not_to_be</code></td><td>Hamlet — “To be, or not to be”</td><td>drama</td><td>en</td></tr>
+<tr><td><code>darwin_natural_selection</code></td><td>On the Origin of Species, Natural Selection</td><td>scientific</td><td>en</td></tr>
+<tr><td><code>declaration_human_equality</code></td><td>Declaration of Independence, Human Equality and the Right of Revolution</td><td>political</td><td>en</td></tr>
+<tr><td><code>descartes_methodic_doubt</code></td><td>Discourse on the Method, Methodic Doubt and the Cogito</td><td>philosophy</td><td>fr</td></tr>
+<tr><td><code>douglass_learning_to_read</code></td><td>Narrative of the Life of Frederick Douglass, Learning to Read</td><td>autobiography</td><td>en</td></tr>
+<tr><td><code>einstein_special_relativity</code></td><td>On the Electrodynamics of Moving Bodies, Opening</td><td>scientific</td><td>de</td></tr>
+<tr><td><code>hamlet_to_be_or_not_to_be</code></td><td>Hamlet, “To be, or not to be”</td><td>drama</td><td>en</td></tr>
 <tr><td><code>invictus</code></td><td>Invictus</td><td>poetry</td><td>en</td></tr>
-<tr><td><code>marcus_aurelius_control_and_judgment</code></td><td>Meditations — On Judgment, Kinship, and Cooperation</td><td>philosophy</td><td>grc</td></tr>
-<tr><td><code>metamorphosis_opening</code></td><td>The Metamorphosis — Opening</td><td>novel</td><td>de</td></tr>
-<tr><td><code>odyssey_opening_invocation</code></td><td>The Odyssey — Opening Invocation</td><td>poetry</td><td>grc</td></tr>
-<tr><td><code>pride_and_prejudice_opening</code></td><td>Pride and Prejudice — Opening</td><td>novel</td><td>en</td></tr>
-<tr><td><code>wollstonecraft_womens_education</code></td><td>A Vindication of the Rights of Woman — On Education and Reason</td><td>philosophy</td><td>en</td></tr>
+<tr><td><code>marcus_aurelius_control_and_judgment</code></td><td>Meditations, On Judgment, Kinship, and Cooperation</td><td>philosophy</td><td>grc</td></tr>
+<tr><td><code>metamorphosis_opening</code></td><td>The Metamorphosis, Opening</td><td>novel</td><td>de</td></tr>
+<tr><td><code>odyssey_opening_invocation</code></td><td>The Odyssey, Opening Invocation</td><td>poetry</td><td>grc</td></tr>
+<tr><td><code>pride_and_prejudice_opening</code></td><td>Pride and Prejudice, Opening</td><td>novel</td><td>en</td></tr>
+<tr><td><code>wollstonecraft_womens_education</code></td><td>A Vindication of the Rights of Woman, On Education and Reason</td><td>philosophy</td><td>en</td></tr>
 </tbody></table></div>
 
 ## Generated variants

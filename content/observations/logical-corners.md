@@ -8,13 +8,13 @@ date = 2026-08-13
 
 What shape appears in an embedding space when a proposition is varied along two controlled linguistic operations: direct grammatical negation and lexical opposition?
 
-The experiment begins with an affirmative statement, **A**—for example, “The painting is beautiful.” It constructs three related states: **not-A** (“The painting is not beautiful”), **B**, the lexical opposite (“The painting is ugly”), and **not-B** (“The painting is not ugly”). These four texts form an experimental square. The square is not assumed to be logical in the strict truth-functional sense. In many cases, *not beautiful* does not entail *ugly*, just as *not full* does not entail *empty*. The corpus records these middle states and scope complications explicitly.
+The experiment begins with an affirmative statement, **A**, for example, “The painting is beautiful.” It constructs three related states: **not-A** (“The painting is not beautiful”), **B**, the lexical opposite (“The painting is ugly”), and **not-B** (“The painting is not ugly”). These four texts form an experimental square. The square is not assumed to be logical in the strict truth-functional sense. In many cases, *not beautiful* does not entail *ugly*, just as *not full* does not entail *empty*. The corpus records these middle states and scope complications explicitly.
 
 The central question is therefore geometric and descriptive: does the embedding model arrange these controlled forms as if negation and lexical opposition were stable, repeatable transformations, or does the arrangement depend on the proposition and language?
 
 ## Design and provenance
 
-The source is immutable run <code>2026-08-13T113927</code> of <code>negation_antonym_square</code>. It contains 30 project-generated base statements, each represented in English, Italian, Chinese, Japanese, and Danish. Every text–language combination has four logical states, producing 600 embedding records and 150 complete squares. The analysis contains all six unique pair relations within every square—900 pairwise measurements—and one unduplicated square-level record per text and language.
+The source is immutable run <code>2026-08-13T113927</code> of <code>negation_antonym_square</code>. It contains 30 project-generated base statements, each represented in English, Italian, Chinese, Japanese, and Danish. Every text–language combination has four logical states, producing 600 embedding records and 150 complete squares. The analysis contains all six unique pair relations within every square, 900 pairwise measurements, and one unduplicated square-level record per text and language.
 
 All texts were embedded with <a class="model-link" href="https://huggingface.co/intfloat/multilingual-e5-large" target="_blank" rel="noopener noreferrer"><code>intfloat/multilingual-e5-large</code><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens the Hugging Face model card in a new tab)</span></a>, pinned to revision <code>3d7cfbd…a574f3</code>, yielding 1,024-dimensional vectors. The completed geometry run reuses byte-identical embeddings from checkpoint <code>2026-08-13T113030</code>; the recorded random seed is 42. This is an exploratory run with no registered hypothesis.
 
@@ -39,7 +39,7 @@ The next-nearest mean relation is **not-A ↔ not-B** at 0.948, followed by **A 
 
 {{ plot(path="charts/negation-pair-similarity.html", ratio="700 / 560", title="Cosine similarity for all six corner relations", caption="Figure 1. Original-space cosine distributions for 900 pair measurements: 30 statements × five languages × six unique pairs. Each shaded box contains 30 observations. The figure uses the pinned 1,024-dimensional embeddings directly; it does not use PCA. Run 2026-08-13T113927, multilingual-e5-large revision 3d7cfbd…a574f3.") }}
 
-The language-conditioned means retain much of this ordering. **not-A ↔ B** is the highest mean pair in English (0.947), Italian (0.963), Japanese (0.962), and Chinese (0.969). Danish is the exception: **not-A ↔ not-B** is highest at 0.950, compared with 0.944 for **not-A ↔ B**. English also shows visibly lower distributions for several relations that include an affirmative corner—for example, mean **A ↔ not-A** is 0.881 in English versus 0.920–0.940 in the other four languages.
+The language-conditioned means retain much of this ordering. **not-A ↔ B** is the highest mean pair in English (0.947), Italian (0.963), Japanese (0.962), and Chinese (0.969). Danish is the exception: **not-A ↔ not-B** is highest at 0.950, compared with 0.944 for **not-A ↔ B**. English also shows visibly lower distributions for several relations that include an affirmative corner, for example, mean **A ↔ not-A** is 0.881 in English versus 0.920–0.940 in the other four languages.
 
 Those differences should not be read as a ranking of languages. Each language has different negation morphology, contractions, tokenization, and generated phrasing, while only one multilingual model is tested. Language is therefore a bundled condition in this run, not an isolated causal variable.
 
@@ -51,7 +51,7 @@ This is precisely the sort of scope distinction the corpus was designed to prese
 
 {{ plot(path="charts/negation-predicate-gap.html", ratio="700 / 760", title="The not-A to B gap by predicate kind and language", caption="Figure 2. Mean original-space cosine for not-A ↔ B, grouped by predicate kind and language. Each cell averages all selected bases of that kind in one language: 80 of 100 cells contain one observation, while copular-adjective cells contain seven, copular-state cells contain three, and causal-change and evaluative-adjective cells contain two. Shading therefore supports descriptive comparison only; unequal cell sizes preclude a balanced predicate-effect estimate. Run 2026-08-13T113927.") }}
 
-At the predicate-row level, the recorded means range from 0.912 for the single quantified-state base to 0.984 for the single transitive-authority base. These endpoints are not stable estimates of predicate classes because most rows contain only five measurements—one base translated into five languages. They are useful as a map back to concrete cases, especially when read with the per-statement logical caveats, but not as evidence that one grammatical class is inherently more “logical” in embedding space.
+At the predicate-row level, the recorded means range from 0.912 for the single quantified-state base to 0.984 for the single transitive-authority base. These endpoints are not stable estimates of predicate classes because most rows contain only five measurements, one base translated into five languages. They are useful as a map back to concrete cases, especially when read with the per-statement logical caveats, but not as evidence that one grammatical class is inherently more “logical” in embedding space.
 
 ## 3. Are repeated operations parallel?
 
@@ -87,7 +87,7 @@ Mean diagonal asymmetry is 0.061 (median 0.043; range 0.0003–0.238), whereas m
 
 The scatter also shows why a single average shape would be inadequate. Chinese “longer / shorter” has the smallest closure residual (0.069), followed by Chinese “north / south” (0.079). English “simple / complex” has the largest (0.965), followed by English “permit / prohibit” (0.957). English has the largest language-level mean for both diagonal asymmetry (0.082) and closure residual (0.753); Chinese has the smallest mean closure residual (0.509). These are observed cases and aggregates, not estimates of language-specific logical capacity.
 
-## 5. What does a global projection reveal—and omit?
+## 5. What does a global projection reveal, and omit?
 
 The shared PCA view is useful for seeing the run’s dominant large-scale organization. PCA was fitted once on all 600 vectors, so every point uses the same basis. PC1 explains 9.8% of total variance and PC2 explains 6.7%, or 16.5% together. State is encoded by grey tone and language by marker shape.
 

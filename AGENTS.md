@@ -1,4 +1,4 @@
-# AGENTS.md — GOM Page Publication Guide
+# AGENTS.md, GOM Page Publication Guide
 
 This repository publishes the public Geometry of Meaning archive. The sibling research
 repository at `../geometry-of-meaning` is the source of truth for corpora, experiment protocols,

@@ -93,6 +93,7 @@ def sync_manifest(path: Path, research_root: Path, seen_outputs: set[str]) -> li
         if not source.is_file():
             raise FileNotFoundError(f"declared chart artifact not found: {source}")
         html = source.read_text(encoding="utf-8", errors="strict")
+        html = html.replace("\u2014", ",")
         if "plotly" not in html.lower():
             raise ValueError(f"chart does not appear to contain Plotly output: {source}")
 
