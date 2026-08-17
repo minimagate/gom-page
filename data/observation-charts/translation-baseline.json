@@ -11,6 +11,10 @@
       "output": "translation-baseline-text-language-heatmap.html"
     },
     {
+      "source": "translation_radar_profile.html",
+      "output": "translation-baseline-radar-profile.html"
+    },
+    {
       "source": "language_centroid_distances.html",
       "output": "translation-baseline-centroid-distances.html"
     },

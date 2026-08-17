@@ -17,6 +17,18 @@
     {% endblock social %}
     <link rel="canonical" href="{% block canonical %}{{ current_url | default(value=config.base_url) }}{% endblock canonical %}">
     <link rel="stylesheet" href="{{ get_url(path='styles/site.css', trailing_slash=false) }}">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$']],
+          displayMath: [['$$', '$$']]
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script defer src="{{ get_url(path='scripts/plot-frames.js', trailing_slash=false) }}"></script>
   </head>
   <body>

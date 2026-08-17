@@ -21,6 +21,10 @@
     {
       "source": "embedding_pca.html",
       "output": "negation-embedding-pca.html"
+    },
+    {
+      "source": "radar_trajectory.html",
+      "output": "negation-radar-trajectory.html"
     }
   ]
 }

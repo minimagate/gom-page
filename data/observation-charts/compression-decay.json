@@ -25,6 +25,10 @@
     {
       "source": "displacement_pca.html",
       "output": "compression-displacement-pca.html"
+    },
+    {
+      "source": "radar_projection.html",
+      "output": "compression-radar-projection.html"
     }
   ]
 }

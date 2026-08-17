@@ -16,13 +16,23 @@ These are properties of one generated variant set measured with one embedding mo
 
 The immutable run contains 240 variants: 12 canonical passages × 5 languages × 4 target compression states. Each text-language sequence begins with an unchanged 100% anchor, followed by generated 50%, 25%, and 12.5% states. The corpus spans seven recorded categories and includes texts whose source languages are English, French, German, and Ancient Greek; all five analyzed language versions are treated as parallel starting points.
 
-All 240 variants were embedded with <code>multilingual-e5-large</code>, model version <code>1.0.0</code>. The run fixes random seed 42 and records generation-prompt hash <code>5f33194…d348</code>. The principal endpoint measure is cosine similarity between a compressed variant and the 100% anchor for the same text in the same language. Euclidean step displacement measures movement between adjacent states, while cumulative trajectory length sums the three adjacent movements. The phase-transition score is the largest adjacent step divided by the mean adjacent step for that trajectory.
+All 240 variants were embedded with <a class="model-link" href="https://huggingface.co/intfloat/multilingual-e5-large" target="_blank" rel="noopener noreferrer"><code>multilingual-e5-large</code><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens the Hugging Face model card in a new tab)</span></a>, recorded model version <code>1.0.0</code>. The run fixes random seed 42 and records generation-prompt hash <code>5f33194…d348</code>. The principal endpoint measure is cosine similarity between a compressed variant and the 100% anchor for the same text in the same language. Euclidean step displacement measures movement between adjacent states, while cumulative trajectory length sums the three adjacent movements. The phase-transition score is the largest adjacent step divided by the mean adjacent step for that trajectory.
 
 This within-language anchor is an important design choice. It removes the initial distance between a translation and an English reference from the compression trajectory. The pinned translation-baseline run is therefore not merged into these figures: it answers a different question about cross-language placement, whereas this report asks how each language version moves from its own starting point.
 
 The stated percentages are generation targets, not independently verified information-content units. The run metrics do not provide a language-neutral measure of realized compression, and word counts are especially difficult to compare across writing systems. Throughout this report, “50%,” “25%,” and “12.5%” name protocol states rather than exact cross-lingual information ratios.
 
 ## Aggregate decay is continuous across all three steps
+
+For an embedding $\mathbf v_{t,\ell,k}$ at level $k$, the line chart reports its cosine to the same text-language anchor $\mathbf a_{t,\ell}=\mathbf v_{t,\ell,1.00}$:
+
+<div class="math-display">$$
+C_{t,\ell,k}=
+\frac{\mathbf a_{t,\ell}\cdot\mathbf v_{t,\ell,k}}
+{\lVert\mathbf a_{t,\ell}\rVert_2\lVert\mathbf v_{t,\ell,k}\rVert_2}.
+$$</div>
+
+The model stores 1,024-dimensional L2-normalized vectors, but the implementation retains the full cosine expression rather than assuming unit length. Each plotted language value is the arithmetic mean of its 12 passage-level $C_{t,\ell,k}$ measurements.
 
 The global mean cosine loss is 0.031813 from 100% to 50%, 0.038326 from 50% to 25%, and 0.037378 from 25% to 12.5%. No single interval contains an aggregate collapse; movement continues at a similar cosine scale through the two later steps. The interquartile interval also widens as compression proceeds: it is 0.960859–0.976371 at 50%, 0.913621–0.946729 at 25%, and 0.877167–0.909277 at 12.5%.
 
@@ -44,13 +54,20 @@ This matrix discourages a purely language-level reading. Chinese is the maximum 
 
 ## The final reduction produces the largest average step
 
-Cosine-to-anchor curves describe endpoints relative to the start; step displacement describes what happens between successive generated states. Pooled across all languages and passages, mean Euclidean step displacement rises from 0.248357 for 100% → 50%, to 0.306116 for 50% → 25%, and 0.358689 for 25% → 12.5%. The distributions overlap, so this is an aggregate ordering rather than a universal sequence-level rule.
+Cosine-to-anchor curves describe endpoints relative to the start; step displacement describes what happens between successive generated states. With the four state vectors ordered as $\mathbf v_0,\ldots,\mathbf v_3$, the reported quantities are:
+
+<div class="math-display">$$
+\Delta_i=\lVert\mathbf v_i-\mathbf v_{i-1}\rVert_2,
+\qquad L_i=\sum_{j=1}^{i}\Delta_j.
+$$</div>
+
+Pooled across all languages and passages, mean Euclidean step displacement rises from 0.248357 for 100% → 50%, to 0.306116 for 50% → 25%, and 0.358689 for 25% → 12.5%. The distributions overlap, so this is an aggregate ordering rather than a universal sequence-level rule.
 
 {{ plot(path="charts/compression-step-displacement.html", ratio="700 / 560", title="Adjacent-step displacement distributions", caption="Figure 4. Euclidean embedding displacement between adjacent compression states, grouped by transition and language. Each box contains 12 passage trajectories; anchor rows are excluded. Source: metrics.parquet, run 2026-08-07T164304, multilingual-e5-large 1.0.0, 180 adjacent-step measurements.") }}
 
 The timing differs by language. Chinese has the smallest mean displacement in the first step (0.218907) and middle step (0.252869), but its final step increases to 0.325047. Japanese changes more sharply: its means are 0.259337, 0.289754, and 0.431672, making its final step the largest language-transition mean in the run. Italian also concentrates more movement in the final step (0.371491). These measurements identify where representation movement occurs; they do not identify which omitted phrases caused it.
 
-The phase-transition score provides a sequence-level version of this concentration. Mean scores range from 1.146260 in English to 1.324312 in Japanese. The largest individual score is 1.568472 for the Japanese <em>Metamorphosis</em> trajectory, followed by 1.519191 for the Japanese Douglass trajectory. “Phase transition” here is a metric name, not evidence of a physical discontinuity or a threshold shared across passages.
+The phase-transition score provides a sequence-level version of this concentration: $P=\max_i\Delta_i/\operatorname{mean}_i\Delta_i$ across the three nonzero steps. Mean scores range from 1.146260 in English to 1.324312 in Japanese. The largest individual score is 1.568472 for the Japanese <em>Metamorphosis</em> trajectory, followed by 1.519191 for the Japanese Douglass trajectory. “Phase transition” here is a metric name, not evidence of a physical discontinuity or a threshold shared across passages.
 
 ## Progressive paths are nearly twice their endpoint distance
 
@@ -64,9 +81,15 @@ The ratio is not dominated by one language: language means range from 1.932418 i
 
 To inspect direction as well as magnitude, each embedding was converted to a displacement vector by subtracting its own text-language 100% anchor. A single two-component PCA was then fitted to all 240 displacement vectors, including the 60 zero anchors, and the three non-anchor states were plotted in that common plane. PC1 explains 9.57% of displacement variance and PC2 4.44%, for 14.01% combined.
 
-{{ plot(path="charts/compression-displacement-pca.html", ratio="700 / 570", title="Anchor-centered compression displacement PCA", caption="Figure 6. Shared PCA projection of anchor-centered displacement vectors: for each text-language state, its 100% anchor embedding is subtracted before fitting PCA. Panels show the 50%, 25%, and 12.5% states in the same coordinate system. PC1 explains 9.57% and PC2 4.44% of displacement variance. Source: embeddings.parquet, run 2026-08-07T164304, multilingual-e5-large, PCA basis = all 240 run embeddings after within-trajectory anchor subtraction.") }}
+{{ plot(path="charts/compression-displacement-pca.html", ratio="700 / 570", title="Anchor-centered compression displacement PCA", caption="Figure 6. Shared PCA projection of anchor-centered displacement vectors: for each text-language state, its 100% anchor embedding is subtracted before fitting PCA. Panels show the 50%, 25%, and 12.5% states in the same coordinate system. PC1 explains 9.57% and PC2 4.44% of displacement variance. Source: embeddings.parquet, run 2026-08-07T164304, multilingual-e5-large 1.0.0, PCA basis = all 240 run embeddings after within-trajectory anchor subtraction.") }}
 
 The projected point cloud expands from 50% to 12.5%, consistent with the larger scalar displacements, but the first two components retain only a small fraction of the original geometry. Apparent clusters or directions in this plane are therefore descriptive views of a lossy projection, not complete maps of semantic movement. The chart is most useful for showing that displacement is multidirectional and heterogeneous; the scalar cosine and Euclidean measurements remain the primary evidence for magnitude.
+
+## A polar projection makes the component-level change inspectable
+
+The experiment dashboard also includes radar charts. This report preserves that chart type as an inspection view rather than treating the enclosed polygon area as a metric. Figure 7 selects the passage with the largest observed five-language terminal cosine range—<em>Meditations</em>, the Marcus Aurelius passage—by a stated rule, then overlays its 100% and 12.5% states. It fits PCA to all 240 standardized compression-run embeddings and plots the first eight component scores; the angular labels are therefore PCA coordinates, not independent semantic dimensions. The figure makes the directional changes in one high-spread trajectory set available without substituting a visual impression for the run's original-space cosine and Euclidean measurements.
+
+{{ plot(path="charts/compression-radar-projection.html", ratio="700 / 620", title="PCA radar projection for the widest terminal spread", caption="Figure 7. The passage with the largest five-language range in 12.5% cosine-to-anchor values (the Marcus Aurelius Meditations passage); 100% and 12.5% embeddings for all five languages are shown on the first eight PCA component axes. PCA is fitted on all 240 standardized compression-run embeddings, so this is a lossy directional display: polygon area and component axes are not semantic measures. Source: embeddings.parquet and metrics.parquet, run 2026-08-07T164304, multilingual-e5-large 1.0.0, 10 plotted embeddings.") }}
 
 ## Exceptions, uncertainty, and inference boundary
 

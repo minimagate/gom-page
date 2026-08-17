@@ -16,11 +16,22 @@ The central question is therefore geometric and descriptive: does the embedding 
 
 The source is immutable run <code>2026-08-13T113927</code> of <code>negation_antonym_square</code>. It contains 30 project-generated base statements, each represented in English, Italian, Chinese, Japanese, and Danish. Every text–language combination has four logical states, producing 600 embedding records and 150 complete squares. The analysis contains all six unique pair relations within every square—900 pairwise measurements—and one unduplicated square-level record per text and language.
 
-All texts were embedded with <code>intfloat/multilingual-e5-large</code>, pinned to revision <code>3d7cfbd…a574f3</code>, yielding 1,024-dimensional vectors. The completed geometry run reuses byte-identical embeddings from checkpoint <code>2026-08-13T113030</code>; the recorded random seed is 42. This is an exploratory run with no registered hypothesis.
+All texts were embedded with <a class="model-link" href="https://huggingface.co/intfloat/multilingual-e5-large" target="_blank" rel="noopener noreferrer"><code>intfloat/multilingual-e5-large</code><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens the Hugging Face model card in a new tab)</span></a>, pinned to revision <code>3d7cfbd…a574f3</code>, yielding 1,024-dimensional vectors. The completed geometry run reuses byte-identical embeddings from checkpoint <code>2026-08-13T113030</code>; the recorded random seed is 42. This is an exploratory run with no registered hypothesis.
 
-The design covers adjectives, states, actions, relations, and quantified propositions, but it is not balanced by predicate kind: seven of the 30 bases are copular adjectives, three are copular states, two are causal-change verbs, two are evaluative adjectives, and each of the other 16 predicate labels occurs once. Consequently, predicate-level averages are descriptive cells, not equally powered comparisons.
+The design covers adjectives, states, actions, relations, and quantified propositions, but it is not balanced by predicate kind: seven of the 30 bases are copular adjectives, three are copular states, two are causal-change verbs, two are evaluative adjectives, and each of the other 16 predicate labels occurs once. Consequently, predicate-level averages are descriptive cells, not equally powered comparisons. All subsequent original-space measurements use normalized embeddings, so cosine and L2 compare direction and separation on a common scale:
+
+<div class="math-display">$$
+\hat{\mathbf e}(x)=\frac{\mathbf e(x)}{\lVert\mathbf e(x)\rVert_2}.
+$$</div>
 
 ## 1. Which corners are nearest?
+
+For one text-language square, let $\mathbf A$, $\mathbf N$, $\mathbf B$, and $\mathbf M$ denote the embeddings of A, not-A, B, and not-B. The pairwise report asks, for each unordered pair $(X,Y)$, how close the following cosine is; its companion distance is shown alongside it:
+
+<div class="math-display">$$
+C(X,Y)=\cos(\mathbf X,\mathbf Y),
+\qquad D(X,Y)=\lVert\mathbf X-\mathbf Y\rVert_2.
+$$</div>
 
 The nearest mean relation across all 150 squares is **not-A ↔ B**, with cosine similarity 0.957. Its median is 0.960 and its observed range is 0.866–0.994. This is the relation between grammatical denial and the affirmative lexical opposite: *not beautiful* versus *ugly*, *did not praise* versus *criticized*, and so on.
 
@@ -44,7 +55,14 @@ At the predicate-row level, the recorded means range from 0.912 for the single q
 
 ## 3. Are repeated operations parallel?
 
-A simple vector model of negation would predict that the displacement from **A → not-A** points in approximately the same direction as **B → not-B**. Cosine alignment quantifies that claim: +1 means parallel, 0 means orthogonal, and −1 means opposite. The analogous comparison for lexical opposition aligns **A → B** with **not-A → not-B**.
+A simple vector model of negation would predict that the displacement from **A → not-A** points in approximately the same direction as **B → not-B**. The report measures this and its lexical-opposition counterpart as:
+
+<div class="math-display">$$
+N_{\mathrm{align}}=\cos(\mathbf N-\mathbf A,\mathbf M-\mathbf B),
+\qquad O_{\mathrm{align}}=\cos(\mathbf B-\mathbf A,\mathbf M-\mathbf N).
+$$</div>
+
+Here +1 means parallel, 0 means orthogonal, and −1 means opposite.
 
 Across the 150 squares, mean negation-edge alignment is −0.104 (median −0.209; range −0.748 to 0.946). Ninety-six squares have negative alignment and 54 have positive alignment. Lexical-opposition edges are more often opposed: their mean alignment is −0.350 (median −0.464; range −0.805 to 0.959), with 126 negative and 24 positive squares.
 
@@ -56,7 +74,12 @@ Language aggregation changes degree but not that heterogeneity. Danish has the o
 
 ## 4. Does the four-corner construction close?
 
-Two measurements test different parts of the square metaphor. **Diagonal asymmetry** is the absolute difference between the two diagonal distances. It can be small even when the four vectors do not form a parallelogram. **Closure residual** measures the remaining vector mismatch; zero would indicate exact parallelogram closure.
+Two measurements test different parts of the square metaphor. **Diagonal asymmetry** can be small even when the four vectors do not form a parallelogram. The **closure residual** measures the remaining vector mismatch; zero would indicate exact parallelogram closure:
+
+<div class="math-display">$$
+\Delta_d=\left|\lVert\mathbf M-\mathbf A\rVert_2-\lVert\mathbf B-\mathbf N\rVert_2\right|,
+\qquad R=\lVert\mathbf A+\mathbf M-\mathbf N-\mathbf B\rVert_2.
+$$</div>
 
 Mean diagonal asymmetry is 0.061 (median 0.043; range 0.0003–0.238), whereas mean closure residual is 0.582 (median 0.610; range 0.069–0.965). The two measures have a Pearson correlation of 0.532 within these 150 squares: larger diagonal imbalance tends to accompany larger residuals, but diagonal balance alone does not determine closure.
 
@@ -71,6 +94,14 @@ The shared PCA view is useful for seeing the run’s dominant large-scale organi
 {{ plot(path="charts/negation-embedding-pca.html", ratio="700 / 650", title="All logical states in a shared PCA plane", caption="Figure 5. Shared two-dimensional PCA of all 600 run embeddings. PC1 explains 9.8% and PC2 6.7% of variance (16.5% combined). PCA was fitted on the complete run population; colours encode logical state and marker shapes encode language. The plot is a lossy global orientation view and must not be used to read exact pairwise similarity, direction alignment, or closure.") }}
 
 The projection is visibly structured by both language and state, but its two axes discard 83.5% of the run-wide variance. Apparent overlaps and distances in the plane can therefore differ from the original 1,024-dimensional measurements. Figures 1–4, not this PCA view, provide the quantitative basis for claims about proximity, displacement alignment, and closure. The projection’s legitimate role is narrower: it shows that the four states are not arranged in one clean, universally separated configuration across the complete multilingual population.
+
+## 6. How does one square move through the shared projection?
+
+The radar view keeps all four states of one concrete phrase-language set together. Its default export uses the English quantified statement “All six lamps are on,” with each state represented by its first ten coordinates on the same PCA basis fitted to all 600 embeddings. The four filled traces are not a trajectory in the original 1,024-dimensional space, nor are their polar areas or overlaps distance measures. They are a compact way to inspect which projected components distinguish A, not-A, B, and not-B for one case that also supplies the lowest recorded English **not-A ↔ B** cosine.
+
+{{ plot(path="charts/negation-radar-trajectory.html", ratio="700 / 530", title="Projected four-state profile for the quantified English example", caption="Figure 6. Radar profile of A, not-A, B, and not-B for “All six lamps are on” in English. Each trace shows PC1–PC10 from a PCA fitted on all 600 run embeddings; radial scales are local to this selected four-state set. The chart is diagnostic and lossy, not a plot of original-space distances or a general summary. Run 2026-08-13T113927; multilingual-e5-large revision 3d7cfbd…a574f3.") }}
+
+This case-level view belongs beside the predicate-gap result rather than replacing it: the quantified statement makes the semantic distinction legible, while the original-space heatmap and pair distributions establish how that distinction compares with the rest of the run.
 
 ## Synthesis
 
@@ -88,4 +119,4 @@ This run characterises one synthetic corpus, one set of generated and translated
 
 The language contrasts also combine translation choice, morphology, syntax, tokenization, and model training. They should be treated as conditions in this dataset rather than typological findings. A stronger follow-up would pre-register contrasts, balance complementarity and predicate classes, add native-speaker review and human entailment labels, and repeat the analysis across independently trained embedding families.
 
-<ul class="source-links"><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/experiments/logical_boundaries/negation_antonym_square/README.md">Experiment protocol</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/notebooks/logical_boundaries/negation_antonym_square.ipynb">Objective source notebook</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/tree/main/runs/logical_boundaries/negation_antonym_square/2026-08-13T113927">Immutable source run</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/runs/logical_boundaries/negation_antonym_square/2026-08-13T113927/manifest.yaml">Run manifest</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/runs/logical_boundaries/negation_antonym_square/2026-08-13T113927/summary.json">Run summary</a></li></ul>
+<ul class="source-links"><li><a href="/experiments/negation-antonym-square/">Method page</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/experiments/logical_boundaries/negation_antonym_square/README.md">Experiment protocol</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/notebooks/logical_boundaries/negation_antonym_square.ipynb">Objective source notebook</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/tree/main/runs/logical_boundaries/negation_antonym_square/2026-08-13T113927">Immutable source run</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/runs/logical_boundaries/negation_antonym_square/2026-08-13T113927/manifest.yaml">Run manifest</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/runs/logical_boundaries/negation_antonym_square/2026-08-13T113927/summary.json">Run summary</a></li><li><a href="https://github.com/minimagate/geometry-of-meaning/blob/main/scripts/showcases/logical_boundaries/negation_antonym_square/build.py">Plotly showcase builder</a></li></ul>
