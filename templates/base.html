@@ -6,13 +6,21 @@
     {% block title %}<title>{{ config.title }}</title>{% endblock title %}
     {% block description %}<meta name="description" content="{{ config.description }}">{% endblock description %}
     <meta name="author" content="{{ config.author }}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta property="og:site_name" content="{{ config.title }}">
+    <meta property="og:locale" content="en_US">
+    {% block social %}
+    <meta property="og:title" content="{{ config.title }}">
+    <meta property="og:description" content="{{ config.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config.base_url }}">
+    {% endblock social %}
     <link rel="canonical" href="{% block canonical %}{{ current_url | default(value=config.base_url) }}{% endblock canonical %}">
     <link rel="stylesheet" href="{{ get_url(path='styles/site.css', trailing_slash=false) }}">
     <script defer src="{{ get_url(path='scripts/plot-frames.js', trailing_slash=false) }}"></script>
   </head>
   <body>
-    <main>
+    <main class="site-main">
       {% include "partials/nav.html" %}
       {% block content %}{% endblock content %}
       {% include "partials/footer.html" %}

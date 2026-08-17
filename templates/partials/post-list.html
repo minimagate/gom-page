@@ -2,7 +2,7 @@
   {% for post in section.pages %}
   <a class="post-link" href="{{ post.permalink }}">
     <div class="post-row">
-      <p>{{ post.title }}</p>
+      <div class="post-name">{{ post.title }}</div>
       <time datetime="{{ post.date }}">{{ post.date | date(format="%B %-d, %Y") }}</time>
     </div>
   </a>
