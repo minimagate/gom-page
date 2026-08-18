@@ -241,7 +241,6 @@ a:focus-visible {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   font-weight: 300;
-  text-transform: capitalize;
 }
 
 .post-name {
@@ -334,7 +333,7 @@ a:focus-visible {
 
 .prose .model-link:hover,
 .prose .model-link:focus-visible {
-  color: var(--color-selection);
+  color: var(--color-text);
   text-decoration-color: currentColor;
 }
 
@@ -462,15 +461,15 @@ a:focus-visible {
 }
 
 .external-link-icon {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   vertical-align: 2px;
 }
 
 .external-link-label {
   height: 1.75rem;
   margin-top: 2px;
-  margin-left: .5rem;
+  margin-left: .375rem;
 }
 
 .copyright {

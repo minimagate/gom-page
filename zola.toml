@@ -1,4 +1,4 @@
-base_url = "https://bivouac.michelangelogubinelli.com/"
+base_url = "https://research.michelangelogubinelli.com/"
 title = "Geometry of Meaning"
 description = "A small public archive for experiments on the geometry of semantic space."
 default_language = "en"
@@ -10,4 +10,4 @@ minify_html = true
 smart_punctuation = true
 
 [extra]
-repository = "https://github.com/bivouachq"
+repository = "https://github.com/minimagate/geometry-of-meaning"
