@@ -5,6 +5,7 @@ default_language = "en"
 author = "Michelangelo Gubinelli"
 compile_sass = false
 minify_html = true
+ignored_static = ["styles/foundation/.git", "styles/foundation/.agents", "styles/foundation/.agents/**"]
 
 [markdown]
 smart_punctuation = true

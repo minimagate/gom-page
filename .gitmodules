@@ -1,0 +1,3 @@
+[submodule "static/styles/foundation"]
+	path = static/styles/foundation
+	url = https://github.com/minimagate/homepage-foundation.git
