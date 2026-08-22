@@ -23,8 +23,9 @@
 .nav-items a:visited,
 .nav-items a:hover,
 .nav-items a:active {
-  color: #000;
+  color: #fff;
   text-decoration: none;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 70%);
 }
 
 .sr-only {
