@@ -2,6 +2,8 @@
 
 A minimal [Zola](https://www.getzola.org/) archive for the Geometry of Meaning research project.
 
+The primary navigation is overlaid on an optimized 736×232 AVIF crop at `static/images/research-header.avif`, taken from the upper portion of the source image.
+
 The archive summarises the research without duplicating its source of truth: every experiment,
 dataset, run, and notebook page links to the corresponding file in the
 [research repository](https://github.com/minimagate/geometry-of-meaning).
