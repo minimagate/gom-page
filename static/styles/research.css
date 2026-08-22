@@ -2,14 +2,6 @@
 
 /* Research-site components ------------------------------------------------ */
 
-.experiments-icon,
-.observations-icon,
-.data-icon {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 18px;
-}
-
 .prose .model-link {
   color: var(--color-text);
   text-decoration: underline;
