@@ -7,9 +7,7 @@
   padding: .375rem .5rem;
   overflow: hidden;
   background-color: #8a8b87;
-  background-image:
-    radial-gradient(ellipse 100% 75% at 100% 0%, rgb(255 255 255 / 55%) 0%, rgb(255 255 255 / 22%) 55%, transparent 100%),
-    url("../images/research-header.avif");
+  background-image: url("../images/research-header.avif");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
