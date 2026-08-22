@@ -2,20 +2,6 @@
 
 /* Research-site components ------------------------------------------------ */
 
-.prose .model-link {
-  color: var(--color-text);
-  text-decoration: underline;
-  text-decoration-color: var(--color-border);
-  text-decoration-thickness: 1px;
-  text-underline-offset: .22em;
-}
-
-.prose .model-link:hover,
-.prose .model-link:focus-visible {
-  color: var(--color-text);
-  text-decoration-color: currentColor;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
